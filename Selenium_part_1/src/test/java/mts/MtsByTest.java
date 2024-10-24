@@ -22,7 +22,7 @@ public class MtsByTest {
 
     @BeforeAll
     public static void setUp() {
-        // Настраиваем WebDriverManager для управления драйвером Chrome
+
         io.github.bonigarcia.wdm.WebDriverManager.chromedriver().setup();
 
         driver = new ChromeDriver();
