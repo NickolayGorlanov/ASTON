@@ -22,7 +22,7 @@ public class HomePage {
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(40)); // Увеличено время ожидания
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(40)); 
     }
 
     public void acceptCookies() {

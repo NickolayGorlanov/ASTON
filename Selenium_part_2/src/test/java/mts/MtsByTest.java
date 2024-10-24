@@ -21,7 +21,7 @@ public class MtsByTest {
 
     @BeforeAll
     public static void setUp() {
-        // Настраиваем WebDriverManager для управления драйвером Chrome
+
         io.github.bonigarcia.wdm.WebDriverManager.chromedriver().setup();
 
         driver = new ChromeDriver();
@@ -88,17 +88,17 @@ public class MtsByTest {
 
         assertTrue(paymentPage.isPaymentFormDisplayed(), "Форма оплаты не видна на странице");
 
-        // Проверка суммы и номера телефона
+
         assertEquals("100.00 BYN", paymentPage.getAmountDisplayed(), "Сумма отображается некорректно");
         assertEquals("375297777777", paymentPage.getPhoneNumberDisplayed(), "Номер телефона отображается некорректно");
 
-        // Проверка надписей над полями ввода
+
         assertEquals("Номер карты", paymentPage.getCardNumberLabelText(), "Надпись над полем номера карты отображается некорректно");
         assertEquals("Срок действия", paymentPage.getExpirationDateLabelText(), "Надпись над полем срока действия карты отображается некорректно");
         assertEquals("CVC", paymentPage.getCvcLabelText(), "Надпись над полем CVC отображается некорректно");
         assertEquals("Имя держателя (как на карте)", paymentPage.getCardHolderLabelText(), "Надпись над полем имени держателя карты отображается некорректно");
 
-        // Проверка наличия иконок платежных систем
+
         assertTrue(paymentPage.arePaymentIconsDisplayed(), "Иконки платежных систем не отображаются");
 
         driver.switchTo().defaultContent();

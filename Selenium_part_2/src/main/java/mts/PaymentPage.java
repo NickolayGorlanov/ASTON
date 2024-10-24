@@ -12,7 +12,7 @@ public class PaymentPage {
     private WebDriver driver;
     private WebDriverWait wait;
 
-    // Локаторы для элементов на странице оплаты
+
     private By cardNumberInput = By.cssSelector("input#cc-number");
     private By cvcInput = By.cssSelector("input[formcontrolname='cvc']");
     private By expirationDateInput = By.cssSelector("input.date-input");
@@ -28,7 +28,7 @@ public class PaymentPage {
 
     public PaymentPage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(30)); // Увеличено время ожидания
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
     }
 
     public void switchToPaymentFrame() {
@@ -56,18 +56,18 @@ public class PaymentPage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(paymentForm)).isDisplayed();
     }
 
-    // Методы для проверки отображения суммы и номера телефона
+
     public String getAmountDisplayed() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(amountDisplay)).getText();
     }
 
     public String getPhoneNumberDisplayed() {
         String fullText = wait.until(ExpectedConditions.visibilityOfElementLocated(phoneNumberDisplay)).getText();
-        // Извлекаем только цифры из строки
+
         return fullText.replaceAll("[^0-9]", "");
     }
 
-    // Методы для проверки надписей над полями ввода
+
     public String getCardNumberLabelText() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(cardNumberLabel)).getText();
     }
@@ -84,7 +84,7 @@ public class PaymentPage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(cardHolderLabel)).getText();
     }
 
-    // Метод для проверки наличия иконок платежных систем
+   
     public boolean arePaymentIconsDisplayed() {
         return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(paymentIcons)).size() > 0;
     }
