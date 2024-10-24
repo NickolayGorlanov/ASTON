@@ -1,0 +1,300 @@
+Имя держателя на карте: ('input[autocomplete="cc-name"]')
+Срок действия: ('input.date-input')
+Номер карты: ('input#cc-number')
+CVC код: ('input[formcontrolname="cvc"]')
+
+<iframe allowpaymentrequest="" class="bepaid-iframe" src="https://checkout.bepaid.by/widget_v2/index.html" style="visibility: visible;"></iframe>
+
+
+
+<div class="pay__form">
+				<div class="select" style="z-index: 1;">
+					<div class="select__select">
+						<select id="pay" name="pay">
+							<!-- В data-open указываем id нужной для открытия формы -->
+							<option value="Услуги связи" data-open="pay-connection" selected="">Услуги связи</option>
+							<option value="Домашний интернет" data-open="pay-internet">Домашний интернет</option>
+							<option value="Рассрочка" data-open="pay-instalment">Рассрочка</option>
+							<option value="Задолженность" data-open="pay-arrears">Задолженность</option>
+						</select>
+					</div>
+					<div class="select__wrapper opened">
+						<button class="select__header"> <span class="select__now">Услуги связи</span><span class="select__arrow">
+								<svg class="icon" width="20" height="20" viewBox="0 0 20 20">
+									<use xlink:href="/local/templates/new_design/assets/html/images/sprites/main.stack.svg#image-drop-arrow">
+									</use>
+								</svg></span></button>
+						<ul class="select__list" style="opacity: 1; visibility: inherit; height: auto;"> <li class="select__item active"><p class="select__option">Услуги связи</p></li><li class="select__item"><p class="select__option">Домашний интернет</p></li><li class="select__item"><p class="select__option">Рассрочка</p></li><li class="select__item"><p class="select__option">Задолженность</p></li></ul>
+					</div>
+				</div>
+				<div class="pay__forms">
+
+					<form class="pay-form opened" id="pay-connection" method="POST" data-gtm-form-interact-id="0">
+						<div class="input-wrapper input-wrapper_label-left">
+							<!-- Класс invalid только для показа ошибки и в теге p указана ошибка -->
+							<input class="phone" id="connection-phone" type="text" placeholder="Номер телефона" required="" maxlength="13" autocomplete="off" data-gtm-form-interact-field-id="1">
+							<label for="connection-phone">+375</label>
+						</div>
+						<div class="input-wrapper input-wrapper_label-right">
+							<input class="total_rub" id="connection-sum" type="text" placeholder="Сумма" required="" data-gtm-form-interact-field-id="0">
+							<label for="connection-sum">Руб.</label>
+
+						</div>
+						<div class="input-wrapper">
+							<input class="email" id="connection-email" type="text" placeholder="E-mail для отправки чека">
+
+						</div>
+						<button class="button button__default " type="submit">Продолжить</button>
+					</form>
+
+					<form class="pay-form" id="pay-internet" method="POST">
+						<div class="input-wrapper input-wrapper_label-left">
+							<input class="phone" id="internet-phone" type="text" placeholder="Номер абонента" required="" maxlength="13" autocomplete="off">
+							<label for="internet-phone">+375</label>
+
+						</div>
+						<div class="input-wrapper input-wrapper_label-right">
+							<input class="total_rub" id="internet-sum" type="text" placeholder="Сумма" required="">
+							<label for="internet-sum">Руб.</label>
+
+						</div>
+						<div class="input-wrapper">
+							<input class="email" id="internet-email" type="text" placeholder="E-mail для отправки чека">
+
+						</div>
+						<button class="button button__default " type="submit">Продолжить</button>
+					</form>
+
+					<form class="pay-form" id="pay-instalment" method="POST">
+						<div class="input-wrapper">
+							<input class="score" id="score-instalment" type="text" placeholder="Номер счета на 44" data-mask="account-num-instalment" required="">
+						</div>
+						<div class="input-wrapper input-wrapper_label-right">
+							<input class="total_rub" id="instalment-sum" type="text" placeholder="Сумма" required="">
+							<label for="instalment-sum">Руб.</label>
+						</div>
+						<div class="input-wrapper">
+							<input class="email" id="instalment-email" type="text" placeholder="E-mail для отправки чека">
+
+						</div>
+						<button class="button button__default" type="submit">Продолжить</button>
+					</form>
+
+					<form class="pay-form" id="pay-arrears" method="POST">
+						<div class="input-wrapper">
+							<input class="score" id="score-arrears" type="text" placeholder="Номер счета на 2073" data-mask="account-num-arrears" required="">
+
+						</div>
+						<div class="input-wrapper input-wrapper_label-right">
+							<input class="total_rub" id="arrears-sum" type="text" placeholder="Сумма" required="">
+							<label for="instalment-sum">Руб.</label>
+
+						</div>
+						<div class="input-wrapper">
+							<input class="email" id="arrears-email" type="text" placeholder="E-mail для отправки чека">
+
+						</div>
+						<button class="button button__default" type="submit">Продолжить</button>
+					</form>
+
+				</div>
+			</div>
+
+
+
+
+			package mts;
+
+            import org.junit.jupiter.api.*;
+            import org.openqa.selenium.By;
+            import org.openqa.selenium.JavascriptExecutor;
+            import org.openqa.selenium.WebDriver;
+            import org.openqa.selenium.WebElement;
+            import org.openqa.selenium.chrome.ChromeDriver;
+            import org.openqa.selenium.support.ui.ExpectedConditions;
+            import org.openqa.selenium.support.ui.WebDriverWait;
+
+            import java.time.Duration;
+            import java.util.List;
+            import java.util.Set;
+
+            import static org.junit.jupiter.api.Assertions.*;
+
+            public class MtsByTest {
+
+                private static WebDriver driver;
+                private static WebDriverWait wait;
+
+                @BeforeAll
+                public static void setUp() {
+                    System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+                    driver = new ChromeDriver();
+                    driver.manage().window().maximize();
+                    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+                    wait = new WebDriverWait(driver, Duration.ofSeconds(40)); // Увеличено время ожидания
+                }
+
+                @AfterAll
+                public static void tearDown() {
+                    if (driver != null) {
+                        driver.quit();
+                    }
+                }
+
+                @Test
+                public void testPaymentSystemLogos() {
+                    driver.get("https://mts.by");
+                    HomePage homePage = new HomePage(driver);
+                    homePage.acceptCookies();
+
+                    WebElement visaLogo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='pay-section']//img[@alt='Visa']")));
+                    WebElement mastercardLogo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='pay-section']//img[@alt='MasterCard']")));
+                    WebElement belkartLogo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='pay-section']//img[@alt='Белкарт']")));
+                    assertNotNull(visaLogo);
+                    assertNotNull(mastercardLogo);
+                    assertNotNull(belkartLogo);
+                }
+
+                @Test
+                public void testMoreAboutServiceLink() {
+                    driver.get("https://mts.by");
+                    HomePage homePage = new HomePage(driver);
+                    homePage.acceptCookies();
+
+                    WebElement linkElement = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Подробнее о сервисе")));
+                    assertNotNull(linkElement);
+                    linkElement.click();
+
+                    WebElement breadcrumbElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                            By.xpath("//span[@itemprop='name' and text()='Порядок оплаты и безопасность интернет платежей']")));
+                    assertNotNull(breadcrumbElement);
+                    assertEquals("Порядок оплаты и безопасность интернет платежей", breadcrumbElement.getText());
+                }
+
+                @Test
+                public void testContinueButton() {
+                    driver.get("https://mts.by");
+                    HomePage homePage = new HomePage(driver);
+                    homePage.acceptCookies();
+
+                    homePage.fillPhoneAndAmount("297777777", "100");
+                    homePage.clickContinue();
+
+                    checkForNewWindowOrIframe();
+
+                    PaymentPage paymentPage = new PaymentPage(driver);
+                    paymentPage.switchToPaymentFrame();
+
+                    assertTrue(paymentPage.isCardNumberInputDisplayed(), "Поле ввода номера карты не отображается");
+                    assertTrue(paymentPage.isCvcInputDisplayed(), "Поле ввода CVC не отображается");
+                    assertTrue(paymentPage.isExpirationDateInputDisplayed(), "Поле ввода срока действия карты не отображается");
+                    assertTrue(paymentPage.isCardHolderInputDisplayed(), "Поле ввода имени держателя карты не отображается");
+
+                    assertTrue(paymentPage.isPaymentFormDisplayed(), "Форма оплаты не видна на странице");
+
+                    // Проверка суммы и номера телефона
+                    assertEquals("100.00 BYN", paymentPage.getAmountDisplayed(), "Сумма отображается некорректно");
+                    assertEquals("375297777777", paymentPage.getPhoneNumberDisplayed(), "Номер телефона отображается некорректно");
+
+                    // Проверка надписей над полями ввода
+                    assertEquals("Номер карты", paymentPage.getCardNumberLabelText(), "Надпись над полем номера карты отображается некорректно");
+                    assertEquals("Срок действия", paymentPage.getExpirationDateLabelText(), "Надпись над полем срока действия карты отображается некорректно");
+                    assertEquals("CVC", paymentPage.getCvcLabelText(), "Надпись над полем CVC отображается некорректно");
+                    assertEquals("Имя держателя (как на карте)", paymentPage.getCardHolderLabelText(), "Надпись над полем имени держателя карты отображается некорректно");
+
+                    // Проверка наличия иконок платежных систем
+                    assertTrue(paymentPage.arePaymentIconsDisplayed(), "Иконки платежных систем не отображаются");
+
+                    checkPaymentFormVisibility();
+                    checkAndFixZIndex();
+                    checkAndFixPositioning();
+                    checkAndFixStyles();
+
+                    driver.switchTo().defaultContent();
+                }
+
+                @Test
+                public void testSelectOptionsAndPlaceholders() {
+                    driver.get("https://mts.by");
+                    HomePage homePage = new HomePage(driver);
+                    homePage.acceptCookies();
+
+                    String[] options = {"Услуги связи", "Домашний интернет", "Рассрочка", "Задолженность"};
+                    String[][] placeholders = {
+                            {"connection-phone", "Номер телефона"},
+                            {"internet-phone", "Номер абонента"},
+                            {"score-instalment", "Номер счета на 44"},
+                            {"score-arrears", "Номер счета на 2073"}
+                    };
+
+                    for (int i = 0; i < options.length; i++) {
+                        homePage.selectOption(options[i]);
+                        assertEquals(options[i], homePage.getSelectedOptionText(), "Выбранный пункт не соответствует ожидаемому");
+
+                        for (int j = 0; j < placeholders[i].length; j += 2) {
+                            assertEquals(placeholders[i][j + 1], homePage.getPlaceholderText(placeholders[i][j]), "Placeholder не соответствует ожидаемому");
+                        }
+                    }
+                }
+
+                private void checkForNewWindowOrIframe() {
+                    String originalWindow = driver.getWindowHandle();
+                    Set<String> allWindows = driver.getWindowHandles();
+
+                    if (allWindows.size() > 1) {
+                        for (String windowHandle : allWindows) {
+                            if (!originalWindow.contentEquals(windowHandle)) {
+                                driver.switchTo().window(windowHandle);
+                                break;
+                            }
+                        }
+                    } else {
+                        List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
+                        System.out.println("Found " + iframes.size() + " iframes on the page after clicking 'Продолжить'.");
+                        for (WebElement iframe : iframes) {
+                            System.out.println("Iframe src: " + iframe.getAttribute("src"));
+                            if (iframe.getAttribute("src").contains("checkout.bepaid.by")) {
+                                driver.switchTo().frame(iframe);
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                private void checkPaymentFormVisibility() {
+                    WebElement paymentForm = driver.findElement(By.xpath("//div[contains(@class, 'card-page__card')]"));
+                    if (!paymentForm.isDisplayed()) {
+                        System.out.println("Форма оплаты не видна на странице.");
+                    } else {
+                        System.out.println("Форма оплаты видна на странице.");
+                    }
+                }
+
+                private void checkAndFixZIndex() {
+                    WebElement paymentForm = driver.findElement(By.xpath("//div[contains(@class, 'card-page__card')]"));
+                    String currentZIndex = paymentForm.getCssValue("z-index");
+                    if (currentZIndex.equals("auto") || Integer.parseInt(currentZIndex) < 1000) {
+                        ((JavascriptExecutor) driver).executeScript("arguments[0].style.zIndex = '1000';", paymentForm);
+                        System.out.println("Изменен z-index формы оплаты.");
+                    }
+                }
+
+                private void checkAndFixPositioning() {
+                    WebElement paymentForm = driver.findElement(By.xpath("//div[contains(@class, 'card-page__card')]"));
+                    String currentPosition = paymentForm.getCssValue("position");
+                    if (!currentPosition.equals("relative")) {
+                        ((JavascriptExecutor) driver).executeScript("arguments[0].style.position = 'relative';", paymentForm);
+                        System.out.println("Изменено позиционирование формы оплаты.");
+                    }
+                }
+
+                private void checkAndFixStyles() {
+                    WebElement paymentForm = driver.findElement(By.xpath("//div[contains(@class, 'card-page__card')]"));
+                    String currentDisplay = paymentForm.getCssValue("display");
+                    if (currentDisplay.equals("none")) {
+                        ((JavascriptExecutor) driver).executeScript("arguments[0].style.display = 'block';", paymentForm);
+                        System.out.println("Изменен стиль отображения формы оплаты.");
+                    }
+                }
+
+            }
